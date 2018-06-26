@@ -21,6 +21,13 @@ class CandidatesController < ApplicationController
   def edit
   end
 
+  def jeslythecool
+    selected_candidate.votes.create
+  end
+
+  def selected_candidate
+    @can = Candidate.find params[:id]
+  end
   # POST /candidates
   # POST /candidates.json
   def create
