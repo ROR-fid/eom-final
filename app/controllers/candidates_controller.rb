@@ -1,11 +1,21 @@
 class CandidatesController < ApplicationController
   before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
+
+
 
   # GET /candidates
   # GET /candidates.json
+
+
   def index
-    @candidates = Candidate.all
+  #@candidates = Candidate.all
+  @candidates = Candidate.order("#{sort_column} #{sort_direction}")
   end
+    #Versuch2
+    #@candidates = Candidate.paginate :page => params[:page], :order => sort_order
+
+
 
   # GET /candidates/1
   # GET /candidates/1.json
@@ -20,9 +30,13 @@ class CandidatesController < ApplicationController
   # GET /candidates/1/edit
   def edit
   end
-
+#Hausaufgabe 1 24.06.2018
   def jeslythecool
     selected_candidate.votes.create
+    respond_to do |format|
+    format.html { redirect_to candidates_url, notice: "You voted successfully for #{selected_candidate.name}"  }
+    format.json { head :no_content }
+    end
   end
 
   def selected_candidate
@@ -30,6 +44,18 @@ class CandidatesController < ApplicationController
   end
   # POST /candidates
   # POST /candidates.json
+  def sortable_columns
+    ["Votes Count"]
+  end
+
+  def sort_column
+    sortable_columns.include?(params[:column]) ? params[:column] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
   def create
     @candidate = Candidate.new(candidate_params)
 
