@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'candidates#new'
+  devise_for :users
+  root 'candidates#index'
   resources :candidates
   post '/candidates/:id/voteoo', to: 'candidates#jeslythecool'
 

@@ -1,5 +1,6 @@
 class CandidatesController < ApplicationController
   before_action :set_candidate, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
   helper_method :sort_column, :sort_direction
 
 
@@ -10,13 +11,11 @@ class CandidatesController < ApplicationController
 
   def index
   #@candidates = Candidate.all
-  @candidates = Candidate.order("#{sort_column} #{sort_direction}")
+  #@candidates = Candidate.order("#{sort_column} #{sort_direction}")
+  #raise params.inspect
+  @candidates = Candidate.left_joins(:votes).group(:id).order("count('votes.candidate_id') #{params[:sort_order]}")
   end
-    #Versuch2
-    #@candidates = Candidate.paginate :page => params[:page], :order => sort_order
-
-
-
+#
   # GET /candidates/1
   # GET /candidates/1.json
   def show
@@ -45,7 +44,7 @@ class CandidatesController < ApplicationController
   # POST /candidates
   # POST /candidates.json
   def sortable_columns
-    ["Votes Count"]
+    ["name", "title"]
   end
 
   def sort_column

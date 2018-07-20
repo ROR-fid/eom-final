@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<tr>Welcome <%= current_user.name%></tr>
 <h1>Candidates</h1>
 
 <table class="table table-bordered table-striped">
@@ -10,8 +10,8 @@
       <th>Votes</th>
       <th>Action1</th>
       <th>Action2</th>
-      <th>Action2</th>
-      <th>Votes Count</th>
+      <th>Action3</th>
+      <th><%= link_to 'Votes Count', "/candidates?sort_order=desc" %></th>
       <th colspan="7"></th>
     </tr>
   </thead>
