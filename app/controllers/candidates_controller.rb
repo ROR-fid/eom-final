@@ -37,6 +37,9 @@ class CandidatesController < ApplicationController
     format.json { head :no_content }
     end
   end
+  def snake
+    render:showsnake
+  end
 
   def selected_candidate
     @can = Candidate.find params[:id]
