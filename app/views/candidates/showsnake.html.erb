@@ -1,3 +1,39 @@
+
+
+<script>
+
+var xorientation = 10
+var yorientation = 4
+var zorientation = 78
+function myFunction(){
+document.getElementById('hiddenX').innerHTML = ' ';
+}
+
+function moveXhorizontal(){
+  //document.getElementById('hiddenX').style.padding="0px 0px 0px "+xorientation+'px';
+  if (xorientation<80) {
+    document.getElementById('hiddenX').style.padding="0px 0px 0px "+xorientation+'px';
+    xorientation=xorientation+10;
+
+}  else {
+    if (yorientation<90) {
+
+
+    document.getElementById('hiddenX').style.padding=yorientation+"px 0px 0px 78px ";
+    yorientation=yorientation+10;
+  //document.getElementById('hiddenX').style.padding=xorientation+'px';
+//xorientation=xorientation+2;
+  }  else {
+      document.getElementById('hiddenX').style.padding="84px 0px 0px "+zorientation+'px';
+      zorientation=zorientation-4;
+
+}
+}
+}
+</script>
+
+
+
 <div style="height:100px; width:100px; background-color:red" >
-<div id="hiddenX" onclick="document.getElementById('hiddenX').innerHTML = ' '">x</div>
+<div id="hiddenX" style="left: 10px" onclick="moveXhorizontal()">xxx</div>
 </div>
